@@ -24,6 +24,8 @@ Object.wait方法，等待直到其它线程调用Object.notify或者Object.noti
       LockSupport.parkUntil
 * TERMINATED 线程终止时的状态。线程已经完成了执行任务。
  
+两种线程锁：对象锁和类锁
+通过它们都叫监控锁？
     
 > **Thread#join**  
 > public final synchronized void join(long millis)  
@@ -43,4 +45,16 @@ Object.wait方法，等待直到其它线程调用Object.notify或者Object.noti
 "Condition Queues," in Brian Goetz and others' <em>Java Concurrency
 in Practice</em> (Addison-Wesley, 2006) or Item 69 in Joshua
 Bloch's <em>Effective Java, Second Edition</em> (Addison-Wesley,2008).
+
+> **Object#nofity**  
+> 唤醒一个正在等待获取该对象的监控锁的对象。如果有多个线程要获取该监控锁，
+则随机唤醒一个线程。在当前线程释放该锁之前，唤醒的线程是不会执行的。
+唤醒的线程通常将会和其它线程一起竞争该对象的监控锁来同步线程。
+唤醒的线程没有可靠的特权或者不得条件支争取下一个获得该对象监控锁。
+各个想要获得该锁的线程处于公平竞争。  
+> 该方法只能被获得该对象监控锁的线程执行。
+> 获得该线程锁有三种方式：
+- 执行该对象实例的同步方法块
+- 执行以该对象为监控锁的同步块
+- 执行该对象类的静态同步方法块
 
