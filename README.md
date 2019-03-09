@@ -73,3 +73,20 @@ java内部类
 ### jvm
 
 ### Hibernate
+
+### 乐观锁和悲欢锁
+
+### 设计模式
+
+### 数据库的优化
+
+### 项目部署
+
+### Dubbo原理
+
+### 商品会用到哪些表
+shopProductSku
+productInfo
+
+### MySql InnerDB
+

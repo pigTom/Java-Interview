@@ -66,9 +66,9 @@ public class NotifyTest extends Thread {
         notify();
     }
 
-    // synchronized on class lock, thread of this class can only execute one by one
+    // synchronized on class0 lock, thread of this class0 can only execute one by one
     private static synchronized void print2() {
-        System.out.println(Thread.currentThread().getName() + " Here I come by class lock - c");
+        System.out.println(Thread.currentThread().getName() + " Here I come by class0 lock - c");
 
         // static synchronized block can`t call wait nor notify
 
@@ -79,7 +79,7 @@ public class NotifyTest extends Thread {
             e.printStackTrace();
         }
         // so once the static synchronized block get monitor lock then
-        System.out.println(Thread.currentThread().getName() + " Here I leave by class lock - c");
+        System.out.println(Thread.currentThread().getName() + " Here I leave by class0 lock - c");
     }
     // test when thread got the monitor lock and release the lock, what will happened
     // current thread will continue util current call wait to relinquishes the lock,
@@ -105,14 +105,14 @@ public class NotifyTest extends Thread {
         for (NotifyTest test : threadArr) {
             test.wake();
         }
-        // test for static method of that class will got the monitor lock
+        // test for static method of that class0 will got the monitor lock
 //        staticPrint(threadArr);
     }
 
-    // question 1:  if a class lock be taken by a thread ,
-    //              whether other thread on the class object will be got the monitor lock.
+    // question 1:  if a class0 lock be taken by a thread ,
+    //              whether other thread on the class0 object will be got the monitor lock.
     // answer   1:  yes, they may got monitor lock with serious possibility
 
-    // question 2:  if a object lock be taken by a thread, then the class lock will be take?
-    // answer   2:  thread on that object class may got the lock and execute with low possibility
+    // question 2:  if a object lock be taken by a thread, then the class0 lock will be take?
+    // answer   2:  thread on that object class0 may got the lock and execute with low possibility
 }

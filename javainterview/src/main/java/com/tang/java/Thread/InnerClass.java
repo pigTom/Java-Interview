@@ -21,7 +21,7 @@ public class InnerClass {
     }
 
    @Test
-    // test can not support thread of inner class
+    // test can not support thread of inner class0
     public void startThread () {
         InnerClass.InnerA innerA = new InnerA();
         Thread thread = new Thread(innerA);
