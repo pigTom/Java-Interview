@@ -50,7 +50,7 @@ public class NotifyTest extends Thread {
         System.out.println(currentThread().getName() + " Here I come by Object lock - o");
         try {
             // wait for itself monitor lock
-//            this.wait();
+            this.wait();
                 Thread.sleep(100);
         } catch (InterruptedException e) {
             e.printStackTrace();

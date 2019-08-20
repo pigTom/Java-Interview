@@ -13,20 +13,33 @@ public class WaitTest extends Thread {
         this.object = object;
     }
 
+    public void setMyName(String name) {
+        this.myName = name;
+    }
+
+    private String myName;
     @Override
     public void run() {
 
         if (object != null) {
             synchronized (object) {
+                System.out.println(myName + " 获得该锁");
                 try {
-                    object.wait();
-                } catch (InterruptedException e) {
+                    // 释放该监控锁, 进入 WAITING_TIMED 状态
+                    object.wait(3000);
+
+
+                    // 睡眠后该线程不会释放该监控锁，所以别的想要拿到该锁的线程只能等待
+                    // 睡眠后该线程变成WAITING_TIMED 状态
+//                    Thread.sleep(1000);
+                } catch (Exception e) {
                     e.printStackTrace();
                 }
+                System.out.println(myName + " 释放该锁");
             }
         }
 
-        System.out.println(Thread.currentThread().getName());
+        System.out.println(myName + "结束");
     }
 
     @Test
@@ -34,7 +47,7 @@ public class WaitTest extends Thread {
         WaitTest a = new WaitTest();
         WaitTest b = new WaitTest();
         Object o = new Object();
-        // thread b cannot be wakened
+        // thread a cannot be wakened
         a.setObject(o);
         a.start();
         b.start();
@@ -60,4 +73,41 @@ public class WaitTest extends Thread {
             System.out.println("Thread name : " + thread.getName());
         }
     }
+
+
+    @Test
+    public void testSleep() {
+        //
+        int size = 5;
+        WaitTest[] tests = new WaitTest[size];
+        Object lock = new Object();
+        for (int i = 0; i < size; i ++) {
+            tests[i] = new WaitTest();
+            tests[i].setObject(lock);
+            tests[i].setMyName(i+"");
+        }
+
+        for (Thread thread : tests) {
+            thread.start();
+        }
+    }
+
+    public static void main(String[] args) {
+        //
+        int size = 5;
+        WaitTest[] tests = new WaitTest[size];
+        Object lock = new Object();
+        for (int i = 0; i < size; i ++) {
+            tests[i] = new WaitTest();
+            tests[i].setMyName(""+i);
+            tests[i].setObject(lock);
+        }
+
+        for (Thread thread : tests) {
+            thread.start();
+        }
+    }
+
+
+
 }
