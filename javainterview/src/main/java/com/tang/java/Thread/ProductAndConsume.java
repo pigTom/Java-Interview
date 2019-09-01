@@ -2,6 +2,8 @@ package com.tang.java.Thread;
 
 public class ProductAndConsume {
 
+    private Object lock;
+
     // product and consume have the same lock, so they can notify each other
     // and execute one by one sequential
     public static void main(String[] args) {
@@ -11,7 +13,7 @@ public class ProductAndConsume {
         // new a lock
         Object lock = new Object();
         product.setMyLock(lock);
-        consume.setMyLock(lock);
+            consume.setMyLock(lock);
 
         Thread productThread = new Thread(product);
         Thread consumeThread = new Thread(consume);

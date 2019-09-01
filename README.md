@@ -58,6 +58,8 @@ Bloch's <em>Effective Java, Second Edition</em> (Addison-Wesley,2008).
 - 执行以该对象为监控锁的同步块
 - 执行该对象类的静态同步方法块
 
+> **Thread#yield**
+> 
 > **Thread.sleep**  
 > 线程睡眠一段时间，睡醒之后会立马争取jvm的执行权
 
